@@ -109,8 +109,10 @@ public class Casino
 				System.out.println("Place bet:");
 				bet = keyboard.nextInt();
 				
+			do 
+			{
 				current = dice.rollValue();
-				System.out.println("Your dice roll score is " + dice.rollValue());
+				System.out.println("Your dice roll score is " + current);
 				
 				if(dice.rule(current) == "reroll") 
 				{
@@ -136,6 +138,7 @@ public class Casino
 				System.out.println("Your score was " + current + "You lost");
 				System.out.println("Your current balance: " + credit);
 			}
+			}while(credit != 0 && yesorno == 1);
 			
 			if (credit == 0 && yesorno == 1)
 				System.out.println("You have run out of money to play with!");
