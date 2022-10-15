@@ -102,54 +102,51 @@ public class Casino
 		if (yesorno == 2) 
 		{	
 			System.out.println(dice.ruleBook2());
-			
-			
-			do 
-			{
-				System.out.println("Place bet:");
-				bet = keyboard.nextInt();
-				
-			do 
-			{
-				current = dice.rollValue();
-				System.out.println("Your dice roll score is " + current);
-				
-				if(dice.rule(current) == "reroll") 
-				{
-					System.out.println("Would you like roll again? You neither got a winning or losing score. 1 to roll again 2 to leave");
-					yesorno = keyboard.nextInt();
-				}
-			
-			if(dice.rule(current) == "You lost") {
-				cred.setLoseBet(credit, bet);
-				credit = cred.getLoseBet();
-				pWriter.println("Craps -$" + bet );
-				System.out.println("Your score was " + current + " You lost");
-				System.out.println("Your current balance: " + credit);
-			}
-		
-			if(dice.rule(current)=="You won") {
-				cred.setWinBet(credit, bet);
-				credit = cred.getWinBet();
-				pWriter.println("Craps +$" + bet );
-				System.out.println("Your score was " + current + " You won");
-				System.out.println("Your current balance: " + credit);
-			}
-			
-			}while 
-				(yesorno == 1);
-			
-			}while(credit != 0 && yesorno == 1);
-			
-			if (credit == 0 && yesorno == 1)
-				System.out.println("You have run out of money to play with!");
-			if (credit == 0 && yesorno == 2)
-				System.out.println("Thank you for playing.");
-			if (yesorno == 2)
-				{
-					System.out.println("Would you like to change game? 2 to change, 3 to leave ");
-					yesorno = keyboard.nextInt();
-				}
+			 do 
+	            {
+	                System.out.println("Place bet:");
+	                bet = keyboard.nextInt();
+
+	                current = dice.rollValue();
+	                System.out.println("Your dice roll score is " + current);
+
+	            while(dice.rule(current) == "reroll") 
+	            {
+	                System.out.println("Would you like roll again? You neither got a winning or losing score. 1 to roll again 2 to leave");
+	                yesorno = keyboard.nextInt();
+	                if (yesorno == 1) {
+	                    current = dice.rollValue();
+	                    System.out.println("Your dice roll score is " + current);}
+	            }
+	            if(dice.rule(current) == "You lost") {
+	                cred.setLoseBet(credit, bet);
+	                credit = cred.getLoseBet();
+	                pWriter.println("Craps -$" + bet );
+	                System.out.println(dice.rule(current));
+	                System.out.println("Your current balance: " + credit);
+	            }
+	            if(dice.rule(current)=="You won") {
+	                cred.setWinBet(credit, bet);
+	                credit = cred.getWinBet();
+	                pWriter.println("Craps +$" + bet );
+	                System.out.println(dice.rule(current));
+	                System.out.println("Your current balance: " + credit);
+	            }
+	            System.out.println("Would you like to continue playing? 1 for yes , 2 for no");
+	            yesorno = keyboard.nextInt();
+
+	            }while(credit != 0 && yesorno == 1);
+
+	            if (credit == 0 && yesorno == 1)
+	                System.out.println("You have run out of money to play with!");
+	            if (credit == 0 && yesorno == 2)
+	                System.out.println("Thank you for playing.");
+	            if (yesorno == 2)
+	                {
+	                    System.out.println("Would you like to change game? 1 to change, 3 to leave ");
+	                    yesorno = keyboard.nextInt();
+	                }
+
 		}
 		
 		if (yesorno == 3) 
