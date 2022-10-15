@@ -120,9 +120,6 @@ public class Casino
 					yesorno = keyboard.nextInt();
 				}
 			
-			}while 
-				(yesorno == 1);
-			
 			if(dice.rule(current) == "You lost") {
 				cred.setLoseBet(credit, bet);
 				credit = cred.getLoseBet();
@@ -135,9 +132,13 @@ public class Casino
 				cred.setWinBet(credit, bet);
 				credit = cred.getWinBet();
 				pWriter.println("Craps +$" + bet );
-				System.out.println("Your score was " + current + "You lost");
+				System.out.println("Your score was " + current + " You won");
 				System.out.println("Your current balance: " + credit);
 			}
+			
+			}while 
+				(yesorno == 1);
+			
 			}while(credit != 0 && yesorno == 1);
 			
 			if (credit == 0 && yesorno == 1)
