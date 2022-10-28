@@ -7,6 +7,10 @@ import java.util.Scanner;
  * @author Mark Truong Other contributors: Version/date: 10/19/2022 Tony Gaddis:
  *         Starting Out With Java, From Control Structures to Objects
  *         Responsibilities of class: Create a project that fulfills all 6 LOs
+ *         Stack Overflow:
+ *         https://stackoverflow.com/questions/12828771/how-to-go-back-to-first-if-statement-if-no-choices-are-valid
+ *         
+ * Version Date: 10/19/2022
  * 
  * 
 /** Purpose: Create a Casino class for the keyboard input and use
