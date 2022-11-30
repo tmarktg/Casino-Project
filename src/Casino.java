@@ -1,6 +1,20 @@
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
+import java.sql.Connection;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  * @author Quoc Minh Tran
@@ -9,24 +23,30 @@ import java.util.Scanner;
  *         Responsibilities of class: Create a project that fulfills all 6 LOs
  *         Stack Overflow:
  *         https://stackoverflow.com/questions/12828771/how-to-go-back-to-first-if-statement-if-no-choices-are-valid
- *         
- * Version Date: 10/19/2022
+ * 
+ *         Version Date: 10/19/2022
  * 
  * 
-/** Purpose: Create a Casino class for the keyboard input and use
+ *         /** Purpose: Create a Casino class for the keyboard input and use
  *         other classes to create logic for game main method: create objects
  *         from classes and keyboard
  */
 
 public class Casino {
 
+	
+
 	public static void main(String[] args) throws IOException {
+
+		new WelcomeFrame();
+		
+
 		Scanner keyboard = new Scanner(System.in); // Create a Scanner object to
 													// read the system input
 		// Create objects needed to run a Casino
 		Blackjack card = new Blackjack();
 		Craps dice = new Craps();
-		Opponent opp = new Opponent();
+
 		Money cred = new Money();
 		PrintWriter pWriter = new PrintWriter("receipts.txt"); // Create
 																// PrintWriter
@@ -89,11 +109,11 @@ public class Casino {
 							} while (current <= 21 && yesorno == 1);
 
 							// Holds the computer score
-							int oppCurrent = opp.startScore();
+							int oppCurrent = card.startScore();
 							// Add scores to the computer current score until it's bigger than the user's
 							do {
-								opp.getExtra();
-								oppCurrent += opp.addScore();
+								card.getExtra();
+								oppCurrent += card.addScore();
 							} while (oppCurrent <= current);
 
 							// Show results
