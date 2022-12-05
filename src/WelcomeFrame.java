@@ -19,8 +19,6 @@ public class WelcomeFrame implements ActionListener{
 	private JPanel panel;
 	
 	
-	
-	
 	public WelcomeFrame() {
 		
 	frame = new JFrame();
@@ -57,14 +55,22 @@ public class WelcomeFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		frame.setVisible(false);
-		new CreditFrame();
-		System.out.println("Hello");
+		String buttonPress="";
 		
-	}
+		if(e.getSource()==button) {
+			buttonPress = "blackjack";
+			System.out.println("Hello");
+			System.out.println(buttonPress);
+		}
 		
-	public JFrame getFrame() {
-		return frame;
+		if(e.getSource()==button2) {
+			buttonPress = "craps";
+			System.out.println("Yo");
+		}
+		frame.dispose();
+		new CreditFrame(buttonPress);
+		
+		
 	}
 		
 		
