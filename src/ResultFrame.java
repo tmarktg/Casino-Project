@@ -107,22 +107,23 @@ public class ResultFrame implements ActionListener{
 		
 		pw.println(a + " in " + bp);
 		pw.println("");
-		
-		if(e.getSource()== button) 
-		{
-			frame.dispose();
-			new BetFrame(bp, credit, pw);
-		}
-		if(e.getSource()== button2) 
-		{
-			frame.dispose();
-			new SwapFrame(bp, credit, pw);
-		}
 		if(credit == 0) 
 		{
 			frame.dispose();
 			new ExitFrame(credit, pw);
 		}
+		
+		else if(e.getSource()== button) 
+		{
+			frame.dispose();
+			new BetFrame(bp, credit, pw);
+		}
+		else if(e.getSource()== button2) 
+		{
+			frame.dispose();
+			new SwapFrame(bp, credit, pw);
+		}
+		
 		
 	}
 	
