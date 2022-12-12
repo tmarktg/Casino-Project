@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.PrintWriter;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -14,16 +15,38 @@ import javax.swing.JTextField;
 
 public class BetFrame implements ActionListener{
 	
+	private static int blackjackPoints, crapsPoints;
 	private JFrame frame2;
 	private JTextField textfield2;
+	private JLabel label, label2;
+	private String bp;
+	private static int betValue, credit;
+	PrintWriter pw;
 	
-	
-	public BetFrame() {
+	public BetFrame(String buttonPress, int currentCre, PrintWriter printw) {
+		
+		this.pw = printw;
+		this.bp = buttonPress;
+		this.credit = currentCre;
+		
 		frame2 = new JFrame();
 		
-		JLabel label = new JLabel("Enter bet");
+		if (bp == "Blackjack") 
+		{
+		Blackjack card = new Blackjack();
+		label = new JLabel("You draw " + card.getDeck());
+		blackjackPoints = card.startScore();
+		}
+		
+		if (bp == "Craps") 
+		{
+		Craps dice = new Craps();
+		label = new JLabel("Enter bet to see roll value");
+		crapsPoints = dice.rollValue();
+		}
 		
 		label.setFont(new Font("Serif", Font.PLAIN, 28));
+		label2= new JLabel("Enter bet:");
 		
 		textfield2 = new JTextField();
 		
@@ -36,6 +59,7 @@ public class BetFrame implements ActionListener{
 		panel.setBorder(BorderFactory.createEmptyBorder(100, 100, 80, 100));
 		panel.setLayout(new GridLayout(0,1));
 		panel.add(label);
+		panel.add(label2);
 		panel.add(textfield2);
 		panel.add(button2);
 		
@@ -44,17 +68,51 @@ public class BetFrame implements ActionListener{
 		frame2.setTitle("My GUI");
 		frame2.pack();
 		frame2.setVisible(true);
+
 		
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
 		String strTextField = textfield2.getText();
-		int betValue = Integer.parseInt(strTextField);
-		frame2.dispose();
+		betValue = Integer.parseInt(strTextField);
 		
+		
+		if(betValue <= 0 || betValue > credit) 
+		{
+			new ErrorFrame(bp, credit, pw);
+		}
+		if(betValue <= credit && bp == "Blackjack") 
+		{
+			new BlackjackFrame(bp, blackjackPoints, credit, pw);
+		}
+		if(betValue <= credit && bp == "Craps") 
+		{	
+			Craps craps = new Craps();
+			if (craps.rule(crapsPoints) == "You win" || craps.rule(crapsPoints) == "You lost")
+			{
+				new ResultFrame(bp, crapsPoints, credit, pw);
+			}
+			if (craps.rule(crapsPoints) == "reroll")
+			{
+				new CrapsFrame(bp, crapsPoints, credit, pw);
+			}
+		}
+		
+		frame2.dispose();
 		
 	}
 	
+	public static int getBlackJackScore() {
+		return blackjackPoints;
+	}
+	
+	public static int getCrapsScore() {
+		return crapsPoints;
+	}
+	public static int getBet()
+	{
+		return betValue;
+	}
 
 }

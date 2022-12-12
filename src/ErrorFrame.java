@@ -4,35 +4,41 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.PrintWriter;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
-public class WelcomeFrame implements ActionListener{
-
+public class ErrorFrame implements ActionListener
+{
 	private JFrame frame;
 	private JLabel label, label2;
-	private JButton button, button2;
+	private JButton button;
 	private JPanel panel;
+	private JTextField textfield;
+	private String bp;
+	private static int credit;
+	PrintWriter pw;
 	
+	public ErrorFrame(String buttonPress, int currentCre, PrintWriter printw){
+	this.pw = printw;
+	this.bp = buttonPress;
+	this.credit = currentCre;
 	
-	public WelcomeFrame() {
-		
 	frame = new JFrame();
 	
-	label = new JLabel("Welcome to M&M Casino!");
-	label2 = new JLabel("Pick game");
+	label = new JLabel("Invalid Input");
+	label2 = new JLabel("Agree to continue");
 	label.setFont(new Font("Serif", Font.PLAIN, 28));
 	
-	button = new JButton("Blackjack");
-	button2 = new JButton("Craps");
-	button2.setPreferredSize(new Dimension(40,40));
 	
+	button = new JButton("Accept");
+	button.setPreferredSize(new Dimension(40,40));
 	button.addActionListener(this);
-	button2.addActionListener(this);
 	
 	panel = new JPanel();
 	panel.setBorder(BorderFactory.createEmptyBorder(100, 100, 80, 100));
@@ -40,7 +46,6 @@ public class WelcomeFrame implements ActionListener{
 	panel.add(label);
 	panel.add(label2);
 	panel.add(button);
-	panel.add(button2);
 	
 	frame.add(panel, BorderLayout.CENTER);
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -48,29 +53,16 @@ public class WelcomeFrame implements ActionListener{
 	frame.pack();
 	frame.setVisible(true);
 	
-	
 	}
-	
-	
+
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		
-		String buttonPress="";
-		
-		if(e.getSource()==button) {
-			buttonPress = "Blackjack";
+	public void actionPerformed(ActionEvent e)
+	{
+		if(e.getSource()== button) {
+			new BetFrame(bp, credit, pw);
 		}
 		
-		if(e.getSource()==button2) {
-			buttonPress = "Craps";
-		}
 		frame.dispose();
-		
-		new CreditFrame(buttonPress);
-		
-		
 	}
-		
-		
-	
+
 }
