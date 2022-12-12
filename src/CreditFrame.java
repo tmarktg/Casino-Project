@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import javax.swing.BorderFactory;
@@ -62,9 +63,17 @@ public class CreditFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String strTextField = textfield.getText();
-		creditValue = Integer.parseInt(strTextField);
 		
+		try {
+			String strTextField = textfield.getText();
+			creditValue = Integer.parseInt(strTextField);
+		}
+		catch (NumberFormatException nfe) {
+			new CreditFrame(bp);
+		}
+		catch (InputMismatchException e1) {
+			new CreditFrame(bp);
+		} 
 			try
 			{
 				pw = new PrintWriter("receipts.txt");

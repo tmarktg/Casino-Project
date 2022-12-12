@@ -35,7 +35,7 @@ public class Craps {
 	public String rule(int current) {
 
 		if (current == 7 || current == 11) {
-			return "You won";
+			return "You win";
 		}
 
 		else if (current == 2 || current == 3 || current == 12) {

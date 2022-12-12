@@ -81,6 +81,7 @@ public class CrapsFrame extends Craps implements ActionListener{
 		if(e.getSource() == button2) {
 			frame.dispose();
 			new ResultFrame(bp, total, credit, pw);
+			
 		}
 		
 	}

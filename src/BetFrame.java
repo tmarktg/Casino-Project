@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.PrintWriter;
+import java.util.InputMismatchException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -74,9 +75,16 @@ public class BetFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		String strTextField = textfield2.getText();
-		betValue = Integer.parseInt(strTextField);
-		
+		try {
+			String strTextField = textfield2.getText();
+			betValue = Integer.parseInt(strTextField);
+		}
+		catch (NumberFormatException nfe) {
+			new BetFrame(bp, credit, pw);
+		}
+		catch (InputMismatchException e1) {
+			new BetFrame(bp, credit, pw);
+		} 
 		
 		if(betValue <= 0 || betValue > credit) 
 		{
